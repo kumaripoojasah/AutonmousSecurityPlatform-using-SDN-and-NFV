@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +21,9 @@ public class User {
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 
+    @Column(unique = true, length = 120)
+    private String email;
+
     @Column(nullable = false)
     private String passwordHash;
 
@@ -34,6 +35,11 @@ public class User {
     private LocalDateTime createdAt;
 
     private LocalDateTime lastLogin;
+
+    // Set when a forgot-password request is made, cleared once the
+    // password is actually reset (or once it expires).
+    private String resetToken;
+    private LocalDateTime resetTokenExpiry;
 
     @PrePersist
     protected void onCreate() {

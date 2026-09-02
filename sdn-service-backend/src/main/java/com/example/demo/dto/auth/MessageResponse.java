@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+// Generic response for endpoints that don't need to return a user object,
+// e.g. forgot-password and reset-password confirmations.
 @Getter
 @Builder
 @AllArgsConstructor
-public class LoginResponse {
+public class MessageResponse {
 
-    private Long userId;
-    private String username;
-    private String role;
-    private String token;
     private String message;
 }

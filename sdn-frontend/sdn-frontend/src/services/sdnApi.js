@@ -1,9 +1,12 @@
 // src/services/sdnApi.js
-const BACKEND_URL = "http://10.214.61.63:8082";
+const BACKEND_URL = "http://localhost:9090";
 
 export async function fetchTrafficData() {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/v1/network/traffic`);
+        const token = localStorage.getItem("sdn_token");
+        const response = await fetch(`${BACKEND_URL}/api/traffic/live`, {
+            headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
